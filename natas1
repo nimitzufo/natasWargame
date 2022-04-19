@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+
+import re
+import requests
+
+level = str(1)
+username = f"natas{level}"
+passwd = "gtVrDuiDfck831PqWsLEZy5gyDz1clto"
+url = f"http://natas{level}.natas.labs.overthewire.org"
+
+response = requests.get(url, auth=(username, passwd))
+content =  response.text
+print(content)
+
+next_pass = re.findall("<!--The password for natas2 is (.*) -->", content)
+print(next_pass[0])
